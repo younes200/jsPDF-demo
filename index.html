@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Test</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+	</head>
+
+	<body>
+		<div class="container">
+      
+      Test
+      <div id="editor">
+        <a href="#" class="btn btn-primary download-pdf">Download PDF</a>
+      </div>
+    </div>
+
+
+		<!-- Scripts down here -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+		<!-- Scripts in development mode -->
+		<script type="text/javascript" src="jspdf.all.js"></script>
+
+
+    <script type="text/javascript">
+    
+    var doc = new jsPDF();
+
+    // We'll make our own renderer to skip this editor
+    var specialElementHandlers = {
+    	'#editor': function(element, renderer){
+    		return true;
+    	}
+    };
+
+    // All units are in the set measurement for the document
+    // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
+    doc.fromHTML($('body').get(0), 15, 15, {
+    	'width': 170, 
+    	'elementHandlers': specialElementHandlers
+    });
+    
+		$('.download-pdf').click(function(){
+			
+			doc.save('demo.pdf');
+		});
+    
+    </script>
+		
+
+	</body>
+</html>
